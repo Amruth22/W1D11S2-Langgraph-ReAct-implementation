@@ -48,6 +48,18 @@ cp .env.example .env
 # Edit .env with your actual API keys
 ```
 
+### Configuration Validation
+
+Test your configuration:
+
+```bash
+# Check if API keys are properly loaded
+python -m src.main --config
+
+# Test with a simple query
+python -m src.main "What is artificial intelligence?"
+```
+
 ### Basic Usage
 
 ```python
