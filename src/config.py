@@ -7,16 +7,21 @@ import os
 from typing import List, Set
 from dotenv import load_dotenv
 
-# Load environment variables
+# Load environment variables from .env file
 load_dotenv()
+
+# Validate that .env file was loaded
+if not os.getenv("GEMINI_API_KEY") and not os.getenv("TAVILY_API_KEY"):
+    print("WARNING: No API keys found in environment variables.")
+    print("Please ensure .env file exists with GEMINI_API_KEY and TAVILY_API_KEY")
 
 
 class Config:
     """Configuration class for the research agent."""
     
-    # API Keys
-    GEMINI_API_KEY: str = os.getenv("GEMINI_API_KEY")
-    TAVILY_API_KEY: str = os.getenv("TAVILY_API_KEY")
+    # API Keys (loaded from .env file)
+    GEMINI_API_KEY: str = os.getenv("GEMINI_API_KEY", "")
+    TAVILY_API_KEY: str = os.getenv("TAVILY_API_KEY", "")
     
     # LLM Configuration
     GEMINI_MODEL: str = "gemini-2.0-flash-exp"
