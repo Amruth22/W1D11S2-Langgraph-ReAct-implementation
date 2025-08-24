@@ -15,7 +15,8 @@ import uuid
 
 # Import project components
 from src.config import Config
-from src.state import ResearchState, SearchResult, SafetyCheck, create_initial_state
+from src.state import ResearchState, SearchResult, SafetyCheck
+from src.nodes import create_initial_state
 from src.safety import URLValidator, ContentModerationChain, SafetyValidator, TokenBucket
 from src.tools import TavilySearchTool, GeminiLLM, StructuredOutputParser
 from src.nodes import ResearchNodes
