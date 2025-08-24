@@ -37,8 +37,8 @@ pip install -r requirements.txt
 The API keys are already configured in the `.env` file:
 
 ```env
-GEMINI_API_KEY=AIzaSyCeQeHPZYUl2iZVMfNCs1hC3FeO23pkRag
-TAVILY_API_KEY=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
+GEMINI_API_KEY=
+TAVILY_API_KEY=
 ```
 
 For your own setup, copy `.env.example` to `.env` and add your API keys:
