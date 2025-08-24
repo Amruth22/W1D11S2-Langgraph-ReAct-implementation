@@ -537,16 +537,6 @@ class TestLangGraphSpecificFeatures(unittest.TestCase):
         print(f"   Retry logic: ✅ Working")
 
 
-def run_async_test(test_method):
-    """Helper to run async test methods"""
-    loop = asyncio.new_event_loop()
-    asyncio.set_event_loop(loop)
-    try:
-        return loop.run_until_complete(test_method())
-    finally:
-        loop.close()
-
-
 if __name__ == "__main__":
     # Create test suite
     test_suite = unittest.TestSuite()
