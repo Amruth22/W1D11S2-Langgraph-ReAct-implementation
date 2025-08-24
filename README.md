@@ -1,8 +1,5 @@
-# Research Assistant Agent with LangGraph & Gemini 2.0 Flash (CLI Version)
-
+# Research Assistant Agent with LangGraph & Gemini 2.0 Flash 
 A sophisticated research assistant that combines **LangGraph** orchestration with **Gemini 2.0 Flash** for fast, cost-effective research with built-in safety guardrails and self-improvement capabilities.
-
-> **Note**: This is the **CLI-only version**. For the full-featured version with FastAPI, authentication, and audit logging, see the `main` branch.
 
 ## Architecture Overview
 
