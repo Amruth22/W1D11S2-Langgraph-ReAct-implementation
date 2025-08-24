@@ -323,7 +323,7 @@ class TestSmartLangGraphIntegration(unittest.TestCase):
         
         # Test simple LLM call
         try:
-            response = await self._run_async_test(llm.generate_plan("What is machine learning?"))
+            response = self._run_async_test(llm.generate_plan("What is machine learning?"))
             
             self.assertIsNotNone(response, "Should get response from Gemini")
             self.assertIsInstance(response.research_plan, str, "Should have research plan")
@@ -351,7 +351,7 @@ class TestSmartLangGraphIntegration(unittest.TestCase):
         search_tool = TavilySearchTool(Config.TAVILY_API_KEY)
         
         try:
-            results = await self._run_async_test(search_tool.search("artificial intelligence", max_results=3))
+            results = self._run_async_test(search_tool.search("artificial intelligence", max_results=3))
             
             self.assertIsInstance(results, list, "Should return list of results")
             
@@ -390,7 +390,7 @@ class TestSmartLangGraphIntegration(unittest.TestCase):
         
         try:
             # Test simple research query
-            result = await self._run_async_test(research_query(
+            result = self._run_async_test(research_query(
                 "What is the definition of artificial intelligence?", 
                 thread_id=self.test_thread_id
             ))
@@ -467,9 +467,14 @@ class TestSmartLangGraphIntegration(unittest.TestCase):
         print(f"   Error accumulation: ✅ Working")
         print(f"   Safety failure handling: ✅ Working")
     
-    async def _run_async_test(self, coro):
+    def _run_async_test(self, coro):
         """Helper to run async tests"""
-        return await coro
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+        try:
+            return loop.run_until_complete(coro)
+        finally:
+            loop.close()
 
 
 class TestLangGraphSpecificFeatures(unittest.TestCase):
