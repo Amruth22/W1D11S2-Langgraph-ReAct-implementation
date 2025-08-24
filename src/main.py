@@ -56,18 +56,44 @@ async def main():
     
     # Show configuration if requested
     if args.config:
-        print("Current Configuration:")
-        print("-" * 30)
+        print("🔧 Research Assistant Agent Configuration")
+        print("=" * 50)
+        
+        # Show safe configuration
         config = Config.get_safe_config()
         for key, value in config.items():
-            print(f"{key}: {value}")
-        print(f"config_valid: {Config.validate_config()}")
+            print(f"  {key}: {value}")
+        
+        # Show API key status
+        print("\n🔑 API Key Status:")
+        print(f"  Gemini API Key: {'✅ Configured' if Config.GEMINI_API_KEY else '❌ Missing'}")
+        print(f"  Tavily API Key: {'✅ Configured' if Config.TAVILY_API_KEY else '❌ Missing'}")
+        
+        # Validate configuration
+        is_valid = Config.validate_config()
+        print(f"\n📊 Configuration Status: {'✅ Valid' if is_valid else '❌ Invalid'}")
+        
+        if not is_valid:
+            print("\n💡 Setup Help:")
+            print("  1. Ensure .env file exists in project root")
+            print("  2. Add your API keys to .env file")
+            print("  3. Get Gemini key: https://aistudio.google.com/app/apikey")
+            print("  4. Get Tavily key: https://tavily.com/")
+            print("  5. See SETUP.md for detailed instructions")
+        
         return
     
     # Validate configuration
     if not Config.validate_config():
-        print("ERROR: Configuration validation failed!")
-        print("Please check your API keys in environment variables or .env file")
+        print("❌ ERROR: Configuration validation failed!")
+        print("\n💡 Quick Fix:")
+        print("  1. Check if .env file exists")
+        print("  2. Verify API keys are correctly set")
+        print("  3. Run 'python -m src.main --config' to see details")
+        print("  4. See SETUP.md for complete setup instructions")
+        print("\n🔑 Required API Keys:")
+        print("  - GEMINI_API_KEY (from https://aistudio.google.com/app/apikey)")
+        print("  - TAVILY_API_KEY (from https://tavily.com/)")
         sys.exit(1)
     
     # Create workflow
