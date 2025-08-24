@@ -107,11 +107,24 @@ class Config:
     @classmethod
     def validate_config(cls) -> bool:
         """Validate that all required configuration is present."""
-        required_keys = [cls.GEMINI_API_KEY, cls.TAVILY_API_KEY]
+        # Check if API keys are present and valid
+        if not cls.GEMINI_API_KEY or cls.GEMINI_API_KEY.startswith("your_"):
+            print("ERROR: GEMINI_API_KEY not found or invalid")
+            return False
         
-        for key in required_keys:
-            if not key or key.startswith("your_") or key.startswith("AIzaSy") and len(key) < 30:
-                return False
+        if not cls.TAVILY_API_KEY or cls.TAVILY_API_KEY.startswith("your_"):
+            print("ERROR: TAVILY_API_KEY not found or invalid")
+            return False
+        
+        # Validate Gemini API key format (should start with 'AIza')
+        if not cls.GEMINI_API_KEY.startswith('AIza') or len(cls.GEMINI_API_KEY) < 30:
+            print("ERROR: GEMINI_API_KEY appears to be invalid format")
+            return False
+        
+        # Validate Tavily API key format (should start with 'tvly-')
+        if not cls.TAVILY_API_KEY.startswith('tvly-') or len(cls.TAVILY_API_KEY) < 20:
+            print("ERROR: TAVILY_API_KEY appears to be invalid format")
+            return False
         
         return True
     
