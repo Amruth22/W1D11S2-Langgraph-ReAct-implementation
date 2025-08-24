@@ -246,8 +246,22 @@ results = await batch_research(queries)
 
 ## Testing
 
+### Smart Integration Tests (Recommended)
 ```bash
-# Run basic tests
+# Run comprehensive smart tests
+python unit_test.py
+```
+
+These tests intelligently:
+- ✅ Test real functionality where possible
+- ⚠️ Gracefully handle API quota limits
+- 📊 Provide clear status reporting
+- 💡 Give helpful guidance for issues
+- 🔧 Validate LangGraph-specific features
+
+### Basic Tests
+```bash
+# Run basic component tests
 python tests/test_basic.py
 
 # Run with pytest (if installed)
